@@ -14,7 +14,17 @@
 </head>
 
 <body>
-    <h1 id="faruk">Phone Hunter</h1>
+    <!-- Header added -->
+    <h1 class="text-center my-3 text-success">Mobile Stalker</h1>
+    <!-- Search Box & Search Button added -->
+    <div class="container w-50 mt-2">
+        <div class="d-flex">
+            <input id="search-text" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button onclick="loadData()" class="btn btn-success" type="submit">Search</button>
+        </div>
+        <p id="error" class="text-danger"></p>
+    </div>
+
 
 
     <script src="js/index.js"></script>
