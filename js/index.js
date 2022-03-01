@@ -12,17 +12,24 @@ const loadData = () => {
         error.innerHTML = "*phone name can't be a number. Please write any text with phone name.";
         search.value = "";
     }
-    else if (searchText.toLowerCase("apple") == searchText.toLowerCase("apple") || searchText.toLowerCase("iphone") == searchText.toLowerCase("iphone") || searchText.toLowerCase("samsung") == searchText.toLowerCase("samsung") || searchText.toLowerCase("oppo") == searchText.toLowerCase("oppo") || searchText.toLowerCase("huawei") == searchText.toLowerCase("huawei")) {
+    else if (isNaN(searchText)) {
         fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
             .then(response => response.json())
-            .then(data => displayPhones(data.data))
+            .then(data => errorHandle(data))
 
         search.value = "";
         error.innerHTML = "";
+
     }
-    else if (searchText == []) {
+}
+const errorHandle = info => {
+    if (info.status == true) {
+        fetch(`https://openapi.programming-hero.com/api/phones?search=${info}`)
+            .then(response => response.json())
+            .then(data => displayPhones(info.data))
+    }
+    else if (info.status == false) {
         error.innerHTML = "*oops! no match found with this phone name.";
-        search.value = "";
     }
 }
 
