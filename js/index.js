@@ -7,16 +7,20 @@ const loadData = () => {
     const searchText = search.value;
     if (searchText == "") {
         error.innerHTML = "*search can't be empty. Please write any text with phone name.";
+        main.innerHTML = "";
     }
     else if (searchText == 0) {
         error.innerHTML = "*zero(0) can't be a phone name. Please write any text with phone name.";
         search.value = "";
+        main.innerHTML = "";
     }
     else if (searchText < 0 || searchText > 0) {
         error.innerHTML = "*phone name can't be a number. Please write any text with phone name.";
         search.value = "";
+        main.innerHTML = "";
     }
     else if (isNaN(searchText)) {
+        main.innerHTML = "";
         fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
             .then(response => response.json())
             .then(data => errorHandle(data))
@@ -35,11 +39,11 @@ const errorHandle = info => {
     }
     else if (info.status == false) {
         error.innerHTML = "*oops! no match found with this phone name.";
+        main.innerHTML = "";
     }
 }
 // Dispaly Phones in coloumn
 const displayPhones = (mobiles) => {
-    // console.log(phones);
     const phones = mobiles.slice(0, 20);
     for (const phone of phones) {
         console.log(phone);
@@ -50,7 +54,7 @@ const displayPhones = (mobiles) => {
         div.classList.add("col-md-4");
         div.classList.add("my-3");
         div.innerHTML = `
-        <div style= "margin-left: 70px;">
+        <div style= "margin-left: 70px; margin-bottom: 30px">
             <div class="card" style="width: 16rem; border: 5px solid gray; border-radius: 15px">
                     <img src="${phone.image}" class="card-img-top mt-3 px-3" alt=" ">
                 <div class="card-body">
